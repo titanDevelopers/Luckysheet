@@ -2040,6 +2040,9 @@ export function rowColumnOperationInitial(){
         }
 
         if(Store.luckysheet_select_save.length > 0){
+            if(!method.createHookFunction("rangeDeleteBefore", Store.luckysheetfile[getSheetIndex(Store.currentSheetIndex)], Store.luckysheet_select_save)){
+                return;
+            }
             let d = editor.deepCopyFlowData(Store.flowdata);
 
             let has_PartMC = false;
@@ -2108,6 +2111,7 @@ export function rowColumnOperationInitial(){
                 }
             }
 
+            method.createHookFunction("rangeDeleteAfter", Store.luckysheet_select_save);
             jfrefreshgrid(d, Store.luckysheet_select_save);
 
             // 清空编辑框的内容
