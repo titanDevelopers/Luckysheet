@@ -3883,6 +3883,11 @@ export default function luckysheetHandler() {
             let col_s = last["column"][0] - col_index_original + col_index,
                 col_e = last["column"][1] - col_index_original + col_index;
 
+            // hook
+            if (!method.createHookFunction('rangeMoveBefore', { row: last["row"], column: last["column"] }, { row: [row_s, row_e], column: [col_s, col_e] })) {
+                return;
+            }
+
             if(!checkProtectionLockedRangeList([{row:[row_s, row_e], column:[col_s, col_e]}], Store.currentSheetIndex)){
                 return;
             }
@@ -4091,7 +4096,7 @@ export default function luckysheetHandler() {
         //选区下拉
         if (Store.luckysheet_cell_selected_extend) {
 
-            
+
             Store.luckysheet_cell_selected_extend = false;
             $("#luckysheet-cell-selected-extend").hide();
 
@@ -4218,6 +4223,11 @@ export default function luckysheetHandler() {
                 else {
                     return;
                 }
+            }
+
+            // hook
+            if (!method.createHookFunction('rangePullBefore', { row: last["row"], column: last["column"] }, { row: [row_s, row_e], column: [col_s, col_e] })) {
+                return;
             }
 
             if (Store.config["merge"] != null) {
