@@ -3884,7 +3884,7 @@ export default function luckysheetHandler() {
                 col_e = last["column"][1] - col_index_original + col_index;
 
             // hook
-            if (!method.createHookFunction('movePullBefore',last["row"], last["column"], [row_s, row_e], [col_s, col_e])){
+            if (!method.createHookFunction('rangeMoveBefore', { oldRow: last["row"], oldCol: last["column"] }, { newRow: [row_s, row_e], newCol: [col_s, col_e] })) {
                 return;
             }
 
@@ -4226,7 +4226,7 @@ export default function luckysheetHandler() {
             }
 
             // hook
-            if (!method.createHookFunction('copyPullBefore',last["row"], last["column"], [row_s, row_e], [col_s, col_e])) {
+            if (!method.createHookFunction('rangePullBefore', { oldRow: last["row"], oldCol: last["column"] }, { newRow: [row_s, row_e], newCol: [col_s, col_e] })) {
                 return;
             }
 
