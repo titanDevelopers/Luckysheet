@@ -2040,7 +2040,7 @@ export function rowColumnOperationInitial(){
         }
 
         if(Store.luckysheet_select_save.length > 0){
-            if(!method.createHookFunction("rangeDeleteBefore", Store.luckysheetfile[getSheetIndex(Store.currentSheetIndex)], Store.luckysheet_select_save)){
+            if(!method.createHookFunction("rangeDeleteBefore", Store.luckysheet_select_save, Store.luckysheetfile[getSheetIndex(Store.currentSheetIndex)])){
                 return;
             }
             let d = editor.deepCopyFlowData(Store.flowdata);
@@ -2111,8 +2111,8 @@ export function rowColumnOperationInitial(){
                 }
             }
 
-            method.createHookFunction("rangeDeleteAfter", Store.luckysheet_select_save);
             jfrefreshgrid(d, Store.luckysheet_select_save);
+            method.createHookFunction("rangeDeleteAfter", Store.luckysheet_select_save);
 
             // 清空编辑框的内容
             // 备注：在functionInputHanddler方法中会把该标签的内容拷贝到 #luckysheet-functionbox-cell
