@@ -38,14 +38,14 @@ function setcellvalue(r, c, d, v) {
 
 
         if(getObjType(v.v) == "object"){
-            vupdate = v.v.v;
+            vupdate = v.v.v ? (v.v.v + '').replace(',', '.') : undefined;
         }
         else{
-            vupdate = v.v;
+            vupdate = v.v ? (v.v + '').replace(',', '.') : undefined;
         }
     }
     else{
-        vupdate = v;
+        vupdate = v ? (v + '').replace(',', '.') : undefined;
     }
 
     if(isRealNull(vupdate)){

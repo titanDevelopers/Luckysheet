@@ -3997,6 +3997,7 @@ const luckysheetformula = {
                     }
                     function_str += functionS + ",";
                     str = "";
+                    // str += ".";
                 }
                 else {
                     str += ",";
