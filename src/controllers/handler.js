@@ -4230,6 +4230,11 @@ export default function luckysheetHandler() {
                 return;
             }
 
+            // hook
+            if (!method.createHookFunction('rangeCopyBefore', { row: last["row"], column: last["column"] }, { row: [row_s, row_e], column: [col_s, col_e] })) {
+                return;
+            }
+
             if (Store.config["merge"] != null) {
                 let hasMc = false;
 
@@ -4283,6 +4288,8 @@ export default function luckysheetHandler() {
 
             luckysheetDropCell.update();
             luckysheetDropCell.createIcon();
+
+            method.createHookFunction('rangeCopyAfter', { row: last["row"], column: last["column"] }, { row: [row_s, row_e], column: [col_s, col_e] })
 
             $("#luckysheet-cell-selected-move").hide();
 
