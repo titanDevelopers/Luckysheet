@@ -4226,7 +4226,7 @@ export default function luckysheetHandler() {
             }
 
             // hook
-            if (!method.createHookFunction('copyPullBefore',last["row"], last["column"], [row_s, row_e], [col_s, col_e])) {
+            if (!method.createHookFunction('rangeCopyBefore', { row: last["row"], column: last["column"] }, { row: [row_s, row_e], column: [col_s, col_e] })) {
                 return;
             }
 
@@ -4284,7 +4284,7 @@ export default function luckysheetHandler() {
             luckysheetDropCell.update();
             luckysheetDropCell.createIcon();
 
-            method.createHookFunction('copyPullAfter',last["row"], last["column"], [row_s, row_e], [col_s, col_e])
+            method.createHookFunction('rangeCopyAfter', { row: last["row"], column: last["column"] }, { row: [row_s, row_e], column: [col_s, col_e] })
 
             $("#luckysheet-cell-selected-move").hide();
 
