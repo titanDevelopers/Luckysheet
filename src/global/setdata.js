@@ -38,14 +38,14 @@ function setcellvalue(r, c, d, v) {
 
 
         if(getObjType(v.v) == "object"){
-            vupdate = v.v.v;
+            vupdate = getValue(v.v.v);
         }
         else{
-            vupdate = v.v;
+            vupdate = getValue(v.v);
         }
     }
     else{
-        vupdate = v;
+        vupdate = getValue(v);
     }
 
     if(isRealNull(vupdate)){
@@ -179,6 +179,9 @@ function setcellvalue(r, c, d, v) {
                         vupdate = parseFloat(vupdate);
                     }
                 }
+                if (luckysheetConfigsetting.useCommaDecimalSeparator && vupdate) {
+                    cell.f = vupdate.replace('.', ',');
+                }
                 cell.v = vupdate;   /* 备注：如果使用parseFloat，1.1111111111111111会转换为1.1111111111111112 ? */
                 cell.ct = { "fa": "General", "t": "n" };
                 if(cell.v == Infinity || cell.v == -Infinity){
@@ -215,6 +218,16 @@ function setcellvalue(r, c, d, v) {
     }
 
     d[r][c] = cell;
+}
+
+function getValue(value) {
+    if (luckysheetConfigsetting.useCommaDecimalSeparator && value) {
+        var test = (value + '').replaceAll(',', '.');
+        if (test.substr(0, 1) == "=" || isRealNum(test)) {
+            value = test;
+        }
+    }
+    return value;
 }
 
 //new runze 根据亿万格式autoFormatw和精确度accuracy 转换成 w/w0/w0.00 or 0/0.0格式

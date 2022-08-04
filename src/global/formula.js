@@ -28,6 +28,7 @@ import Store from '../store';
 import locale from '../locale/locale';
 import json from './json';
 import method from './method';
+import luckysheetConfigsetting from '../controllers/luckysheetConfigsetting';
 
 const luckysheetformula = {
     error: {
@@ -3850,6 +3851,10 @@ const luckysheetformula = {
 
         if (txt == null) {
             return "";
+        }
+
+        if (luckysheetConfigsetting.useCommaDecimalSeparator) {
+            txt = txt.replaceAll(',', '.');
         }
 
         if (txt.substr(0, 2) == "=+") {

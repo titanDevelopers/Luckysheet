@@ -2,6 +2,7 @@ import { isRealNum, valueIsError } from './validate';
 import { isdatetime } from './datecontroll';
 import { getcellvalue } from './getdata';
 import numeral from 'numeral';
+import luckysheetConfigsetting from '../controllers/luckysheetConfigsetting';
 
 var SSF = ({});
 var make_ssf = function make_ssf(SSF) {
@@ -302,7 +303,7 @@ var make_ssf = function make_ssf(SSF) {
             else if (Math.abs(V) <= 9) o = small_exp(v);
             else if (V === 10) o = v.toFixed(10).substr(0, 12);
             else o = large_exp(v);
-            return strip_decimal(normalize_exp(o.toUpperCase()));
+            return getValue(strip_decimal(normalize_exp(o.toUpperCase())));
         }
         return general_fmt_num_base;
     })();
@@ -515,6 +516,7 @@ var make_ssf = function make_ssf(SSF) {
             } else o = val.toExponential(idx);
             if (fmt.match(/E\+00$/) && o.match(/e[+-]\d$/)) o = o.substr(0, o.length - 1) + "0" + o.charAt(o.length - 1);
             if (fmt.match(/E\-/) && o.match(/e\+/)) o = o.replace(/e\+/, "e");
+            o = getValue(o);
             return o.replace("e", "E");
         }
         var frac1 = /# (\?+)( ?)\/( ?)(\d+)/;
@@ -532,6 +534,7 @@ var make_ssf = function make_ssf(SSF) {
             return sign + (aval === 0 ? "" : "" + aval) + fill(" ", r[1].length + 2 + r[4].length);
         }
         var dec1 = /^#*0*\.([0#]+)/;
+        var dec2 = /^#*0*\,([0#]+)/;
         var closeparen = /\).*[0#]/;
         var phone = /\(###\) ###\\?-####/;
 
@@ -603,6 +606,12 @@ var make_ssf = function make_ssf(SSF) {
                     return "." + $1 + fill("0", hashq(r[1]).length - $1.length);
                 });
                 return fmt.indexOf("0.") !== -1 ? o : o.replace(/^0\./, ".");
+            }
+            if ((r = fmt.match(dec2))) {
+                o = rnd(val, r[1].length).replace(/^([^\.]+)$/, "$1," + hashq(r[1])).replace(/\.$/, "," + hashq(r[1])).replace(/\.(\d*)$/, function($$, $1) {
+                    return "," + $1 + fill("0", hashq(r[1]).length - $1.length);
+                });
+                return fmt.indexOf("0,") !== -1 ? o : o.replace(/^0\./, "");
             }
             fmt = fmt.replace(/^#+([0.])/, "$1");
             if ((r = fmt.match(/^(0*)\.(#*)$/))) {
@@ -712,6 +721,7 @@ var make_ssf = function make_ssf(SSF) {
             } else o = val.toExponential(idx);
             if (fmt.match(/E\+00$/) && o.match(/e[+-]\d$/)) o = o.substr(0, o.length - 1) + "0" + o.charAt(o.length - 1);
             if (fmt.match(/E\-/) && o.match(/e\+/)) o = o.replace(/e\+/, "e");
+            o = getValue(o);
             return o.replace("e", "E");
         }
 
@@ -742,6 +752,13 @@ var make_ssf = function make_ssf(SSF) {
                     return "." + $1 + fill("0", hashq(r[1]).length - $1.length);
                 });
                 return fmt.indexOf("0.") !== -1 ? o : o.replace(/^0\./, ".");
+            }
+            if ((r = fmt.match(dec2))) {
+                o = ("" + val).replace(/^([^\,]+)$/, "$1," + hashq(r[1])).replace(/\.$/, "," + hashq(r[1]));
+                o = o.replace(/\,(\d*)$/, function($$, $1) {
+                    return "," + $1 + fill("0", hashq(r[1]).length - $1.length);
+                });
+                return fmt.indexOf("0,") !== -1 ? o : o.replace(/^0\,/, ",");
             }
             fmt = fmt.replace(/^#+([0.])/, "$1");
             if ((r = fmt.match(/^(0*)\.(#*)$/))) {
@@ -1722,6 +1739,21 @@ function parseDate(str, fixdate) {
     return out;
 }
 
+function getFormat() {
+    if (luckysheetConfigsetting.useCommaDecimalSeparator) {
+        return "0,";
+    } else {
+        return "0.";
+    }
+}
+
+function getValue(value) {
+    if (luckysheetConfigsetting.useCommaDecimalSeparator && value) {
+        value = value.replace('.', ',');
+    }
+    return value
+}
+
 /* TODO: stress test */
 function fuzzynum(s) {
     var v = Number(s);
@@ -1807,10 +1839,10 @@ export function genarate(value) {//万 单位格式增加！！！
                 strlen = 5;
             }
 
-            ct = { "fa": "#0."+ new Array(strlen + 1).join("0") +"E+00", "t": "n" }; 
+            ct = { "fa": "#" + getFormat() + new Array(strlen + 1).join("0") +"E+00", "t": "n" }; 
         }
         else{
-            ct = { "fa": "#0.E+00", "t": "n" };
+            ct = { "fa": "#" + getFormat() + "E+00", "t": "n" };
         }
 
         m = SSF.format(ct.fa, v);
@@ -1853,7 +1885,7 @@ export function genarate(value) {//万 单位格式增加！！！
                         }
                     }
                     else{
-                        ct = { "fa": "0." + new Array(len + 1).join("0") + "%", "t": "n" };
+                        ct = { "fa": getFormat() + new Array(len + 1).join("0") + "%", "t": "n" };
                         v = numeral(value).value();
                         m = SSF.format(ct.fa, v);
                     }
@@ -1928,7 +1960,7 @@ export function genarate(value) {//万 单位格式增加！！！
             }
             else{
                 if(isRealNum(value1) && isRealNum(value2)){
-                    ct = { "fa": "0." + new Array(len + 1).join("0"), "t": "n" };
+                    ct = { "fa": getFormat() + new Array(len + 1).join("0"), "t": "n" };
                     v = numeral(value).value();
                     m = SSF.format(ct.fa, v);
                 }
