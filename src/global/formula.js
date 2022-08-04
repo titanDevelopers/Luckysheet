@@ -3853,9 +3853,9 @@ const luckysheetformula = {
             return "";
         }
 
-		if (luckysheetConfigsetting.useCommaDecimalSeparator) {
+        if (luckysheetConfigsetting.useCommaDecimalSeparator) {
             txt = txt.replaceAll(',', '.');
-		}
+        }
 
         if (txt.substr(0, 2) == "=+") {
             txt = txt.substr(2);

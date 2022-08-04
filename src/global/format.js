@@ -303,11 +303,7 @@ var make_ssf = function make_ssf(SSF) {
             else if (Math.abs(V) <= 9) o = small_exp(v);
             else if (V === 10) o = v.toFixed(10).substr(0, 12);
             else o = large_exp(v);
-            var ret = strip_decimal(normalize_exp(o.toUpperCase()));
-			if (luckysheetConfigsetting.useCommaDecimalSeparator) {
-				ret = ret.replace('.', ',');
-			}
-			return ret;
+            return getValue(strip_decimal(normalize_exp(o.toUpperCase())));
         }
         return general_fmt_num_base;
     })();
@@ -520,9 +516,7 @@ var make_ssf = function make_ssf(SSF) {
             } else o = val.toExponential(idx);
             if (fmt.match(/E\+00$/) && o.match(/e[+-]\d$/)) o = o.substr(0, o.length - 1) + "0" + o.charAt(o.length - 1);
             if (fmt.match(/E\-/) && o.match(/e\+/)) o = o.replace(/e\+/, "e");
-			if (luckysheetConfigsetting.useCommaDecimalSeparator) {
-				o = o.replace('.', ',');
-			}
+            o = getValue(o);
             return o.replace("e", "E");
         }
         var frac1 = /# (\?+)( ?)\/( ?)(\d+)/;
@@ -727,9 +721,7 @@ var make_ssf = function make_ssf(SSF) {
             } else o = val.toExponential(idx);
             if (fmt.match(/E\+00$/) && o.match(/e[+-]\d$/)) o = o.substr(0, o.length - 1) + "0" + o.charAt(o.length - 1);
             if (fmt.match(/E\-/) && o.match(/e\+/)) o = o.replace(/e\+/, "e");
-			if (luckysheetConfigsetting.useCommaDecimalSeparator) {
-				o = o.replace('.', ',');
-			}
+            o = getValue(o);
             return o.replace("e", "E");
         }
 
@@ -1748,11 +1740,18 @@ function parseDate(str, fixdate) {
 }
 
 function getFormat() {
-	if (luckysheetConfigsetting.useCommaDecimalSeparator) {
-		return "0,";
-	} else {
-		return "0.";
-	}
+    if (luckysheetConfigsetting.useCommaDecimalSeparator) {
+        return "0,";
+    } else {
+        return "0.";
+    }
+}
+
+function getValue(value) {
+    if (luckysheetConfigsetting.useCommaDecimalSeparator && value) {
+        value = value.replace('.', ',');
+    }
+    return value
 }
 
 /* TODO: stress test */
