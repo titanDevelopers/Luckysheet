@@ -5662,6 +5662,8 @@ export default function luckysheetHandler() {
                     selection.pasteHandler(txtdata);
                 }
             }
+
+            method.createHookFunction('rangePasteAfter', Store.luckysheet_select_save,txtdata);
         }
         else if($(e.target).closest('#luckysheet-rich-text-editor').length > 0) {
             
