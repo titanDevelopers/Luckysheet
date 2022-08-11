@@ -5407,6 +5407,7 @@ export default function luckysheetHandler() {
             if(!method.createHookFunction('rangePasteBefore',Store.luckysheet_select_save,txtdata)){
                 return;
             }
+            const oldData = [...Store.flowdata];
 
             if (txtdata.indexOf("luckysheet_copy_action_table") > - 1 && Store.luckysheet_copy_save["copyRange"] != null && Store.luckysheet_copy_save["copyRange"].length > 0 && isEqual) {
                 //剪切板内容 和 luckysheet本身复制的内容 一致
@@ -5663,7 +5664,7 @@ export default function luckysheetHandler() {
                 }
             }
 
-            method.createHookFunction('rangePasteAfter', Store.luckysheet_select_save,txtdata);
+            method.createHookFunction('rangePasteAfter', oldData, Store.luckysheet_select_save,txtdata);
         }
         else if($(e.target).closest('#luckysheet-rich-text-editor').length > 0) {
             
