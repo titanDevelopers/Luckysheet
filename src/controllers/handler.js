@@ -5404,7 +5404,7 @@ export default function luckysheetHandler() {
 
             
             // hook
-            if(!method.createHookFunction('rangePasteBefore',Store.luckysheet_select_save,txtdata)){
+            if(!method.createHookFunction('rangePasteBefore', Store.luckysheet_copy_save, Store.luckysheet_select_save,txtdata)){
                 return;
             }
             const oldData = [...Store.flowdata];
