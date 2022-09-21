@@ -3421,7 +3421,7 @@ const luckysheetformula = {
                 }
                 else {
                     value = _this.ltGtSignDeal(value);
-                    $copy.html(value);
+                    $copy.html('');
                 }
             }
 
