@@ -3419,10 +3419,6 @@ const luckysheetformula = {
                         $copy.html(value);
                     }
                 }
-                else {
-                    value = _this.ltGtSignDeal(value);
-                    $copy.html(value);
-                }
             }
 
 
