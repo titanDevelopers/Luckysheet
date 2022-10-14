@@ -3849,8 +3849,10 @@ const luckysheetformula = {
             return "";
         }
 
+        let separator = ',';
         if (luckysheetConfigsetting.useCommaDecimalSeparator) {
             txt = txt.replaceAll(',', '.');
+            separator = '.';
         }
 
         if (txt.substr(0, 2) == "=+") {
@@ -3990,7 +3992,7 @@ const luckysheetformula = {
                     firstSQ = i;
                 }
             }
-            else if (s == ',' && matchConfig.squote == 0 && matchConfig.dquote == 0 && matchConfig.braces == 0) {
+            else if (s == separator && matchConfig.squote == 0 && matchConfig.dquote == 0 && matchConfig.braces == 0) {
                 if (bracket.length <= 1) {
                     let functionS = _this.functionParser(str, cellRangeFunction);
                     if (functionS.indexOf("#lucky#") > -1) {
