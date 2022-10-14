@@ -3992,7 +3992,7 @@ const luckysheetformula = {
                     firstSQ = i;
                 }
             }
-            else if (s == separator && (bracket.length == 1 || separator == ',') && matchConfig.squote == 0 && matchConfig.dquote == 0 && matchConfig.braces == 0) {
+            else if (s == separator && bracket.length == 1 && matchConfig.squote == 0 && matchConfig.dquote == 0 && matchConfig.braces == 0) {
                 if (bracket.length <= 1) {
                     let functionS = _this.functionParser(str, cellRangeFunction);
                     if (functionS.indexOf("#lucky#") > -1) {
