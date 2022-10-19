@@ -1075,7 +1075,7 @@ const luckysheetformula = {
                 nameli = paramitem.name;
 
             if (paramitem.repeat == "y") {
-                name += ", ...";
+                name += "; ...";
                 nameli += '<span class="luckysheet-arguments-help-argument-info">...-' + locale_formulaMore.allowRepeatText + '</span>';
             }
             if (paramitem.require == "o") {
@@ -1083,8 +1083,8 @@ const luckysheetformula = {
                 nameli += '<span class="luckysheet-arguments-help-argument-info">-[' + locale_formulaMore.allowOptionText + ']</span>';
             }
 
-            fht += '<span class="luckysheet-arguments-help-parameter" dir="auto">' + name + '</span>, ';
-            ahf += '<span class="luckysheet-arguments-help-parameter" dir="auto">' + paramitem.example + '</span>, ';
+            fht += '<span class="luckysheet-arguments-help-parameter" dir="auto">' + name + '</span>; ';
+            ahf += '<span class="luckysheet-arguments-help-parameter" dir="auto">' + paramitem.example + '</span>; ';
             fhcp += replaceHtml(helpformulaArg, {
                 "param": nameli,
                 "content": paramitem.detail
@@ -3524,9 +3524,9 @@ const luckysheetformula = {
                 str += "'";
                 matchConfig.squote = matchConfig.squote == 0 ? 1 : 0;
             }
-            else if (s == ',' && matchConfig.squote == 0 && matchConfig.dquote == 0 && matchConfig.braces == 0) {
+            else if (s == ';' && matchConfig.squote == 0 && matchConfig.dquote == 0 && matchConfig.braces == 0) {
                 //matchConfig.comma += 1;
-                function_str += _this.functionHTML(str) + '<span dir="auto" class="luckysheet-formula-text-comma">,</span>';
+                function_str += _this.functionHTML(str) + '<span dir="auto" class="luckysheet-formula-text-comma">;</span>';
                 str = "";
             }
             else if (s == '&' && matchConfig.squote == 0 && matchConfig.dquote == 0 && matchConfig.braces == 0) {
@@ -3849,10 +3849,8 @@ const luckysheetformula = {
             return "";
         }
 
-        let separator = ',';
         if (luckysheetConfigsetting.useCommaDecimalSeparator) {
             txt = txt.replaceAll(',', '.');
-            separator = '.';
         }
 
         if (txt.substr(0, 2) == "=+") {
@@ -3992,7 +3990,7 @@ const luckysheetformula = {
                     firstSQ = i;
                 }
             }
-            else if (s == separator && bracket.length == 1 && matchConfig.squote == 0 && matchConfig.dquote == 0 && matchConfig.braces == 0) {
+            else if (s == ';' && matchConfig.squote == 0 && matchConfig.dquote == 0 && matchConfig.braces == 0) {
                 if (bracket.length <= 1) {
                     let functionS = _this.functionParser(str, cellRangeFunction);
                     if (functionS.indexOf("#lucky#") > -1) {
