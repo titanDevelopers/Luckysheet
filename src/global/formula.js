@@ -1075,7 +1075,7 @@ const luckysheetformula = {
                 nameli = paramitem.name;
 
             if (paramitem.repeat == "y") {
-                name += ", ...";
+                name += `${this.getFunctionSeparator()} ...`;
                 nameli += '<span class="luckysheet-arguments-help-argument-info">...-' + locale_formulaMore.allowRepeatText + '</span>';
             }
             if (paramitem.require == "o") {
