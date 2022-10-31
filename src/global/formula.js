@@ -1820,8 +1820,8 @@ const luckysheetformula = {
                     str += '"';
                 }
             }
-            else if (s == ',' && matchConfig.dquote == 0) {
-                function_str += _this.functionCopy(str, mode, step) + ',';
+            else if (s == this.getFunctionSeparator() && matchConfig.dquote == 0) {
+                function_str += _this.functionCopy(str, mode, step) + this.getFunctionSeparator();
                 str = "";
             }
             else if (s == '&' && matchConfig.dquote == 0) {
@@ -2497,7 +2497,7 @@ const luckysheetformula = {
                 _this.rangeSetValueTo = anchor.parent();
             }
 
-            if ((istooltip && (lasttxt == "(" || lasttxt == ",")) || (!istooltip && (lasttxt == "(" || lasttxt == "," || lasttxt == "=" || lasttxt in _this.operatorjson || lasttxt == "&"))) {
+            if ((istooltip && (lasttxt == "(" || lasttxt == ",")) || (!istooltip && (lasttxt == "(" || lasttxt == this.getFunctionSeparator() || lasttxt == "=" || lasttxt in _this.operatorjson || lasttxt == "&"))) {
                 return true;
             }
         }
