@@ -1075,7 +1075,7 @@ const luckysheetformula = {
                 nameli = paramitem.name;
 
             if (paramitem.repeat == "y") {
-                name += ", ...";
+                name += `${this.getFunctionSeparator()} ...`;
                 nameli += '<span class="luckysheet-arguments-help-argument-info">...-' + locale_formulaMore.allowRepeatText + '</span>';
             }
             if (paramitem.require == "o") {
@@ -1083,8 +1083,8 @@ const luckysheetformula = {
                 nameli += '<span class="luckysheet-arguments-help-argument-info">-[' + locale_formulaMore.allowOptionText + ']</span>';
             }
 
-            fht += '<span class="luckysheet-arguments-help-parameter" dir="auto">' + name + '</span>, ';
-            ahf += '<span class="luckysheet-arguments-help-parameter" dir="auto">' + paramitem.example + '</span>, ';
+            fht += '<span class="luckysheet-arguments-help-parameter" dir="auto">' + name + `</span> ${this.getFunctionSeparator()} `;
+            ahf += '<span class="luckysheet-arguments-help-parameter" dir="auto">' + paramitem.example +`</span>${this.getFunctionSeparator()} `;
             fhcp += replaceHtml(helpformulaArg, {
                 "param": nameli,
                 "content": paramitem.detail
@@ -1820,8 +1820,8 @@ const luckysheetformula = {
                     str += '"';
                 }
             }
-            else if (s == ',' && matchConfig.dquote == 0) {
-                function_str += _this.functionCopy(str, mode, step) + ',';
+            else if (s == this.getFunctionSeparator() && matchConfig.dquote == 0) {
+                function_str += _this.functionCopy(str, mode, step) + this.getFunctionSeparator();
                 str = "";
             }
             else if (s == '&' && matchConfig.dquote == 0) {
@@ -2497,7 +2497,7 @@ const luckysheetformula = {
                 _this.rangeSetValueTo = anchor.parent();
             }
 
-            if ((istooltip && (lasttxt == "(" || lasttxt == ",")) || (!istooltip && (lasttxt == "(" || lasttxt == "," || lasttxt == "=" || lasttxt in _this.operatorjson || lasttxt == "&"))) {
+            if ((istooltip && (lasttxt == "(" || lasttxt == ",")) || (!istooltip && (lasttxt == "(" || lasttxt == this.getFunctionSeparator() || lasttxt == "=" || lasttxt in _this.operatorjson || lasttxt == "&"))) {
                 return true;
             }
         }
@@ -3419,10 +3419,6 @@ const luckysheetformula = {
                         $copy.html(value);
                     }
                 }
-                else {
-                    value = _this.ltGtSignDeal(value);
-                    $copy.html(value);
-                }
             }
 
 
@@ -3528,9 +3524,9 @@ const luckysheetformula = {
                 str += "'";
                 matchConfig.squote = matchConfig.squote == 0 ? 1 : 0;
             }
-            else if (s == ',' && matchConfig.squote == 0 && matchConfig.dquote == 0 && matchConfig.braces == 0) {
+            else if (s == this.getFunctionSeparator() && matchConfig.squote == 0 && matchConfig.dquote == 0 && matchConfig.braces == 0) {
                 //matchConfig.comma += 1;
-                function_str += _this.functionHTML(str) + '<span dir="auto" class="luckysheet-formula-text-comma">,</span>';
+                function_str += _this.functionHTML(str) + `<span dir="auto" class="luckysheet-formula-text-comma">${this.getFunctionSeparator()}</span>`;
                 str = "";
             }
             else if (s == '&' && matchConfig.squote == 0 && matchConfig.dquote == 0 && matchConfig.braces == 0) {
@@ -3623,6 +3619,13 @@ const luckysheetformula = {
         }
 
         return function_str;
+    },
+    getFunctionSeparator: function() {
+        if (luckysheetConfigsetting.useCommaDecimalSeparator) {
+            return ";";
+        } else {
+            return ",";
+        }
     },
     getfunctionParam: function (txt) {
         let _this = this;
@@ -3994,7 +3997,7 @@ const luckysheetformula = {
                     firstSQ = i;
                 }
             }
-            else if (s == ',' && matchConfig.squote == 0 && matchConfig.dquote == 0 && matchConfig.braces == 0) {
+            else if (s == this.getFunctionSeparator() && matchConfig.squote == 0 && matchConfig.dquote == 0 && matchConfig.braces == 0) {
                 if (bracket.length <= 1) {
                     let functionS = _this.functionParser(str, cellRangeFunction);
                     if (functionS.indexOf("#lucky#") > -1) {

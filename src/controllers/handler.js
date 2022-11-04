@@ -3883,8 +3883,10 @@ export default function luckysheetHandler() {
             let col_s = last["column"][0] - col_index_original + col_index,
                 col_e = last["column"][1] - col_index_original + col_index;
 
+            const oldRange = { ...{ row: last["row"], column: last["column"] } }
+            
             // hook
-            if (!method.createHookFunction('rangeMoveBefore', { row: last["row"], column: last["column"] }, { row: [row_s, row_e], column: [col_s, col_e] })) {
+            if (!method.createHookFunction('rangeMoveBefore', oldRange, { row: [row_s, row_e], column: [col_s, col_e] })) {
                 return;
             }
 
@@ -4074,9 +4076,13 @@ export default function luckysheetHandler() {
                 "cdformat": cdformat
             }
 
+            const oldData = [...Store.flowdata];
+
             jfrefreshgrid(d, range, allParam);
 
             selectHightlightShow();
+
+            method.createHookFunction('rangeMoveAfter', oldData, oldRange, { row: [row_s, row_e], column: [col_s, col_e] })
 
             $("#luckysheet-sheettable").css("cursor", "default");
             clearTimeout(Store.countfuncTimeout);
@@ -4225,13 +4231,10 @@ export default function luckysheetHandler() {
                 }
             }
 
+            const oldRange = { ...{ row: last["row"], column: last["column"] } }
+    
             // hook
-            if (!method.createHookFunction('rangePullBefore', { row: last["row"], column: last["column"] }, { row: [row_s, row_e], column: [col_s, col_e] })) {
-                return;
-            }
-
-            // hook
-            if (!method.createHookFunction('rangeCopyBefore', { row: last["row"], column: last["column"] }, { row: [row_s, row_e], column: [col_s, col_e] })) {
+            if (!method.createHookFunction('rangePullBefore', oldRange, { row: [row_s, row_e], column: [col_s, col_e] })) {
                 return;
             }
 
@@ -4283,13 +4286,15 @@ export default function luckysheetHandler() {
                 }
             }
 
+            const oldData = [...Store.flowdata];
+
             last["row"] = [row_s, row_e];
             last["column"] = [col_s, col_e];
 
             luckysheetDropCell.update();
             luckysheetDropCell.createIcon();
 
-            method.createHookFunction('rangeCopyAfter', { row: last["row"], column: last["column"] }, { row: [row_s, row_e], column: [col_s, col_e] })
+            method.createHookFunction('rangePullAfter', oldData, oldRange, { row: [row_s, row_e], column: [col_s, col_e] })
 
             $("#luckysheet-cell-selected-move").hide();
 
@@ -5399,9 +5404,10 @@ export default function luckysheetHandler() {
 
             
             // hook
-            if(!method.createHookFunction('rangePasteBefore',Store.luckysheet_select_save,txtdata)){
+            if(!method.createHookFunction('rangePasteBefore', Store.luckysheet_copy_save, Store.luckysheet_select_save,txtdata)){
                 return;
             }
+            const oldData = [...Store.flowdata];
 
             if (txtdata.indexOf("luckysheet_copy_action_table") > - 1 && Store.luckysheet_copy_save["copyRange"] != null && Store.luckysheet_copy_save["copyRange"].length > 0 && isEqual) {
                 //剪切板内容 和 luckysheet本身复制的内容 一致
@@ -5657,6 +5663,8 @@ export default function luckysheetHandler() {
                     selection.pasteHandler(txtdata);
                 }
             }
+
+            method.createHookFunction('rangePasteAfter', oldData, Store.luckysheet_select_save,txtdata);
         }
         else if($(e.target).closest('#luckysheet-rich-text-editor').length > 0) {
             
