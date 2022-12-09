@@ -372,10 +372,10 @@ const luckysheetDropCell = {
             let type = $(this).attr("data-type");
             _this.applyType = type;
 
-            const updated = _this.update();
+            _this.update();
 
             // hook
-            method.createHookFunction('pullMenuUpdated', updated.d, updated.range);
+            method.createHookFunction('dropCellMenuUpdated', Store.flowdata, Store.luckysheet_select_save);
 
             $("#luckysheet-dropCell-typeList").hide();
             $("#luckysheet-dropCell-icon").css("backgroundColor", "#f1f1f1");
@@ -887,10 +887,6 @@ const luckysheetDropCell = {
         jfrefreshgrid(d, Store.luckysheet_select_save, allParam);
 
         selectHightlightShow();
-
-        const range = {...Store.luckysheet_select_save};
-
-        return { d, range };
     },
     getCopyData: function(d, r1, r2, c1, c2, direction){
         let _this = this;
