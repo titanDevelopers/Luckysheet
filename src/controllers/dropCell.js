@@ -6,6 +6,7 @@ import { genarate, update } from '../global/format';
 import { jfrefreshgrid } from '../global/refresh';
 import editor from '../global/editor';
 import formula from '../global/formula';
+import method from '../global/method';
 import conditionformat from './conditionformat';
 import {checkProtectionLockedRangeList} from './protection';
 import { selectHightlightShow } from './select';
@@ -372,6 +373,9 @@ const luckysheetDropCell = {
             _this.applyType = type;
 
             _this.update();
+
+            // hook
+            method.createHookFunction('dropCellMenuUpdated', Store.flowdata, Store.luckysheet_select_save);
 
             $("#luckysheet-dropCell-typeList").hide();
             $("#luckysheet-dropCell-icon").css("backgroundColor", "#f1f1f1");
