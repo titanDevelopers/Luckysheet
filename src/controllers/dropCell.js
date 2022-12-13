@@ -339,10 +339,10 @@ const luckysheetDropCell = {
                 $("#luckysheet-dropCell-typeList .luckysheet-cols-menuitem[data-type=8]").hide();
             }
 
-			if (!luckysheetConfigsetting.spreadsheetFunctionsFF) {
+            if (!luckysheetConfigsetting.spreadsheetFunctionsFF) {
                 $("#luckysheet-dropCell-typeList .luckysheet-cols-menuitem[data-type=2]").hide();
                 $("#luckysheet-dropCell-typeList .luckysheet-cols-menuitem[data-type=3]").hide();
-			}
+            }
 
             let left = $(this).offset().left;
             let top = $(this).offset().top + 25;
