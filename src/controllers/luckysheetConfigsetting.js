@@ -34,6 +34,7 @@ const luckysheetConfigsetting = {
     plugins:[],
     forceCalculation:false,//强制刷新公式，公式较多会有性能问题，慎用
     useCommaDecimalSeparator: false,
+    spreadsheetFunctionsFF: false,
 
     defaultColWidth:73,
     defaultRowHeight:19,
