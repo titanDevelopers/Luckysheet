@@ -14,7 +14,8 @@ import { getSheetIndex } from '../methods/get';
 import { getObjType, replaceHtml } from '../utils/util';
 import Store from '../store';
 import locale from '../locale/locale';
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
+import luckysheetConfigsetting from '../controllers/luckysheetConfigsetting';
 
 //选区下拉
 const luckysheetDropCell = {
@@ -337,6 +338,11 @@ const luckysheetDropCell = {
             if(!typeItemHide[3]){
                 $("#luckysheet-dropCell-typeList .luckysheet-cols-menuitem[data-type=8]").hide();
             }
+
+			if (!luckysheetConfigsetting.spreadsheetFunctionsFF) {
+                $("#luckysheet-dropCell-typeList .luckysheet-cols-menuitem[data-type=2]").hide();
+                $("#luckysheet-dropCell-typeList .luckysheet-cols-menuitem[data-type=3]").hide();
+			}
 
             let left = $(this).offset().left;
             let top = $(this).offset().top + 25;
