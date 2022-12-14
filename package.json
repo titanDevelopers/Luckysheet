@@ -1,6 +1,6 @@
 {
   "name": "@kros-sk/luckysheet",
-  "version": "2.1.31",
+  "version": "2.1.32",
   "main": "dist/luckysheet.cjs.js",
   "module": "dist/luckysheet.esm.js",
   "browser": "dist/luckysheet.umd.js",
