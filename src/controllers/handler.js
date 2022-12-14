@@ -4161,17 +4161,7 @@ export default function luckysheetHandler() {
             //applyType
             let typeItemHide = luckysheetDropCell.typeItemHide();
 
-            if (!luckysheetConfigsetting.spreadsheetFunctionsFF) {
-                luckysheetDropCell.applyType = "0";
-            }
-            else {
-                if (!typeItemHide[0] && !typeItemHide[1] && !typeItemHide[2] && !typeItemHide[3] && !typeItemHide[4] && !typeItemHide[5] && !typeItemHide[6]) {
-                    luckysheetDropCell.applyType = "0";
-                }
-                else {
-                    luckysheetDropCell.applyType = "1";
-                }
-            }
+            luckysheetDropCell.applyType = "0";
 
             if (Math.abs(row_index_original - row_index) > Math.abs(col_index_original - col_index)) {
                 if (!(row_index >= row_s && row_index <= row_e)) {
