@@ -4158,8 +4158,6 @@ export default function luckysheetHandler() {
 
             //复制范围
             luckysheetDropCell.copyRange = { "row": $.extend(true, [], last["row"]), "column": $.extend(true, [], last["column"]) };
-            //applyType
-            let typeItemHide = luckysheetDropCell.typeItemHide();
 
             luckysheetDropCell.applyType = "0";
 
