@@ -10,6 +10,7 @@ import { rowLocationByIndex, colLocationByIndex } from '../global/location';
 import Store from '../store';
 import locale from '../locale/locale';
 import { luckysheetrefreshgrid } from '../global/refresh';
+import luckysheetConfigsetting from '../controllers/luckysheetConfigsetting';
 
 
 const luckysheetFreezen = {
@@ -95,33 +96,35 @@ const luckysheetFreezen = {
             _this.initialVertical = false;
             $("#luckysheet-grid-window-1").append(_this.freezenVerticalHTML);
 
-            $("#luckysheet-freezebar-vertical").find(".luckysheet-freezebar-vertical-drop").hover(function () {
-                $(this).parent().addClass("luckysheet-freezebar-hover");
-            }, function () {
-                $(this).parent().removeClass("luckysheet-freezebar-hover");
-            });
+            if (!luckysheetConfigsetting.useKrosCustomization) {
+                $("#luckysheet-freezebar-vertical").find(".luckysheet-freezebar-vertical-drop").hover(function () {
+                   $(this).parent().addClass("luckysheet-freezebar-hover");
+                }, function () {
+                    $(this).parent().removeClass("luckysheet-freezebar-hover");
+                });
 
 
-            $("#luckysheet-freezebar-vertical").find(".luckysheet-freezebar-vertical-drop").mousedown(function () {
-                _this.verticalmovestate = true;
-                _this.verticalmoveposition = $(this).position().left;
-                _this.windowWidth = $("#luckysheet-grid-window-1").width();
+                $("#luckysheet-freezebar-vertical").find(".luckysheet-freezebar-vertical-drop").mousedown(function () {
+                    _this.verticalmovestate = true;
+                    _this.verticalmoveposition = $(this).position().left;
+                    _this.windowWidth = $("#luckysheet-grid-window-1").width();
 
-                $(this).parent().addClass("luckysheet-freezebar-active");
-                $("#luckysheet-freezebar-vertical").find(".luckysheet-freezebar-vertical-handle").css("cursor", "-webkit-grabbing");
-            });
+                    $(this).parent().addClass("luckysheet-freezebar-active");
+                    $("#luckysheet-freezebar-vertical").find(".luckysheet-freezebar-vertical-handle").css("cursor", "-webkit-grabbing");
+                });
+            }
 
             let gridheight = $("#luckysheet-grid-window-1").height();
             $("#luckysheet-freezebar-vertical").find(".luckysheet-freezebar-vertical-handle").css({ 
                 "height": gridheight - 10, 
                 "width": "4px", 
-                "cursor": "-webkit-grab", 
+                "cursor": luckysheetConfigsetting.useKrosCustomization ? "default" : "-webkit-grab", 
                 "top": "0px" 
             }).end().find(".luckysheet-freezebar-vertical-drop").css({ 
                 "height": gridheight - 10, 
                 "width": "4px", 
                 "top": "0px", 
-                "cursor": "-webkit-grab" 
+                "cursor": luckysheetConfigsetting.useKrosCustomization ? "default" : "-webkit-grab" 
             });
         }
 
@@ -379,32 +382,34 @@ const luckysheetFreezen = {
             _this.initialHorizontal = false;
             $("#luckysheet-grid-window-1").append(_this.freezenHorizontalHTML);
 
-            $("#luckysheet-freezebar-horizontal").find(".luckysheet-freezebar-horizontal-drop").hover(function () {
-                $(this).parent().addClass("luckysheet-freezebar-hover");
-            }, function () {
-                $(this).parent().removeClass("luckysheet-freezebar-hover");
-            });
+            if (!luckysheetConfigsetting.useKrosCustomization) {
+                $("#luckysheet-freezebar-horizontal").find(".luckysheet-freezebar-horizontal-drop").hover(function () {
+                    $(this).parent().addClass("luckysheet-freezebar-hover");
+                }, function () {
+                    $(this).parent().removeClass("luckysheet-freezebar-hover");
+                });
 
-            $("#luckysheet-freezebar-horizontal").find(".luckysheet-freezebar-horizontal-drop").mousedown(function () {
-                _this.horizontalmovestate = true;
-                _this.horizontalmoveposition = $(this).position().top;
-                _this.windowHeight = $("#luckysheet-grid-window-1").height();
+                $("#luckysheet-freezebar-horizontal").find(".luckysheet-freezebar-horizontal-drop").mousedown(function () {
+                    _this.horizontalmovestate = true;
+                    _this.horizontalmoveposition = $(this).position().top;
+                    _this.windowHeight = $("#luckysheet-grid-window-1").height();
 
-                $(this).parent().addClass("luckysheet-freezebar-active");
-                $("#luckysheet-freezebar-horizontal").find(".luckysheet-freezebar-horizontal-handle").css("cursor", "-webkit-grabbing");
-            });
+                    $(this).parent().addClass("luckysheet-freezebar-active");
+                    $("#luckysheet-freezebar-horizontal").find(".luckysheet-freezebar-horizontal-handle").css("cursor", "-webkit-grabbing");
+                });
+            }
 
             let gridwidth = $("#luckysheet-grid-window-1").width();
             $("#luckysheet-freezebar-horizontal").find(".luckysheet-freezebar-horizontal-handle").css({ 
                 "width": gridwidth - 10, 
                 "height": "4px", 
-                "cursor": "-webkit-grab", 
+                "cursor": luckysheetConfigsetting.useKrosCustomization ? "default" : "-webkit-grab", 
                 "left": "0px" 
             }).end().find(".luckysheet-freezebar-horizontal-drop").css({ 
                 "width": gridwidth - 10, 
                 "height": "4px", 
                 "left": "0px", 
-                "cursor": "-webkit-grab" 
+                "cursor": luckysheetConfigsetting.useKrosCustomization ? "default" : "-webkit-grab" 
             });
         }
 

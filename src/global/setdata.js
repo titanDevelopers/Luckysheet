@@ -179,7 +179,7 @@ function setcellvalue(r, c, d, v) {
                         vupdate = parseFloat(vupdate);
                     }
                 }
-                if (luckysheetConfigsetting.useCommaDecimalSeparator && vupdate) {
+                if (luckysheetConfigsetting.useKrosCustomization && vupdate) {
                     cell.f = vupdate.replace('.', ',');
                 }
                 cell.v = vupdate;   /* 备注：如果使用parseFloat，1.1111111111111111会转换为1.1111111111111112 ? */
@@ -221,7 +221,7 @@ function setcellvalue(r, c, d, v) {
 }
 
 function getValue(value) {
-    if (luckysheetConfigsetting.useCommaDecimalSeparator && value) {
+    if (luckysheetConfigsetting.useKrosCustomization && value) {
         var test = (value + '').replaceAll(',', '.');
         if (test.substr(0, 1) == "=" || isRealNum(test)) {
             value = test;

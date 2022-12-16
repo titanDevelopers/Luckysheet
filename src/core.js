@@ -147,7 +147,7 @@ luckysheet.create = function (setting) {
     luckysheetConfigsetting.initShowsheetbarConfig = false;
 
     luckysheetConfigsetting.imageUpdateMethodConfig = extendsetting.imageUpdateMethodConfig;
-    luckysheetConfigsetting.useCommaDecimalSeparator = extendsetting.useCommaDecimalSeparator;
+    luckysheetConfigsetting.useKrosCustomization = extendsetting.useKrosCustomization;
     luckysheetConfigsetting.spreadsheetFunctionsFF = extendsetting.spreadsheetFunctionsFF;
 
     if (Store.lang === 'zh') flatpickr.localize(Mandarin.zh);
