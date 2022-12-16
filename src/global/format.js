@@ -607,7 +607,7 @@ var make_ssf = function make_ssf(SSF) {
                 });
                 return fmt.indexOf("0.") !== -1 ? o : o.replace(/^0\./, ".");
             }
-            if (luckysheetConfigsetting.useCommaDecimalSeparator && (r = fmt.match(dec2))) {
+            if (luckysheetConfigsetting.useKrosCustomization && (r = fmt.match(dec2))) {
                 o = rnd(val, r[1].length).replace(/^([^\.]+)$/, "$1," + hashq(r[1])).replace(/\.$/, "," + hashq(r[1])).replace(/\.(\d*)$/, function($$, $1) {
                     return "," + $1 + fill("0", hashq(r[1]).length - $1.length);
                 });
@@ -753,7 +753,7 @@ var make_ssf = function make_ssf(SSF) {
                 });
                 return fmt.indexOf("0.") !== -1 ? o : o.replace(/^0\./, ".");
             }
-            if (luckysheetConfigsetting.useCommaDecimalSeparator && (r = fmt.match(dec2))) {
+            if (luckysheetConfigsetting.useKrosCustomization && (r = fmt.match(dec2))) {
                 o = ("" + val).replace(/^([^\,]+)$/, "$1," + hashq(r[1])).replace(/\.$/, "," + hashq(r[1]));
                 o = o.replace(/\,(\d*)$/, function($$, $1) {
                     return "," + $1 + fill("0", hashq(r[1]).length - $1.length);
@@ -1740,7 +1740,7 @@ function parseDate(str, fixdate) {
 }
 
 function getFormat() {
-    if (luckysheetConfigsetting.useCommaDecimalSeparator) {
+    if (luckysheetConfigsetting.useKrosCustomization) {
         return "0,";
     } else {
         return "0.";
@@ -1748,7 +1748,7 @@ function getFormat() {
 }
 
 function getValue(value) {
-    if (luckysheetConfigsetting.useCommaDecimalSeparator && value) {
+    if (luckysheetConfigsetting.useKrosCustomization && value) {
         value = value.replace('.', ',');
     }
     return value
