@@ -7,6 +7,7 @@ import { selectHightlightShow } from './select';
 import pivotTable from './pivotTable';
 import Store from '../store';
 import server from './server';
+import luckysheetConfigsetting from '../controllers/luckysheetConfigsetting';
 
 function luckysheetMoveEndCell(postion, type, isScroll, terminal, onlyvalue) {
     if (isScroll == null) {
@@ -596,7 +597,11 @@ function luckysheetMoveHighlightCell(postion, index, type, isScroll) {
     let scrollLeft = $("#luckysheet-cell-main").scrollLeft();
     let scrollTop = $("#luckysheet-cell-main").scrollTop();
     let winH = $("#luckysheet-cell-main").height(), winW = $("#luckysheet-cell-main").width();
-    let frozenColumnWidth = $("#luckysheet-grid-window-1")[0].children[4].width;
+    let frozenColumnWidth = 20;
+
+    if (luckysheetConfigsetting.useKrosCustomization) {
+        frozenColumnWidth = $("#freezen_3").width() !== null ? $("#freezen_3").width() : $("#freezen_v").width();
+    }
 
     let sleft = 0, stop = 0;
     if (col - scrollLeft - winW + 20 > 0) {
