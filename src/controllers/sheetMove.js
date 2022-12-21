@@ -600,7 +600,7 @@ function luckysheetMoveHighlightCell(postion, index, type, isScroll) {
     let frozenColumnWidth = 20;
 
     if (luckysheetConfigsetting.useKrosCustomization) {
-        frozenColumnWidth = $("#freezen_3").width() !== null ? $("#freezen_3").width() : $("#freezen_v").width();
+        frozenColumnWidth = $("#freezen_3")?.width() ?? $("#freezen_v")?.width() ?? frozenColumnWidth;
     }
 
     let sleft = 0, stop = 0;
