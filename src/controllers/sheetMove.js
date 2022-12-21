@@ -604,8 +604,8 @@ function luckysheetMoveHighlightCell(postion, index, type, isScroll) {
             $("#luckysheet-scrollbar-x").scrollLeft(sleft);
         }
     }
-    else if (col_pre - scrollLeft - 20 < 0) {
-        sleft = col_pre - 20;
+    else if (col_pre - scrollLeft - 91 < 0) {
+        sleft = col_pre - 91;
         if (isScroll) {
             $("#luckysheet-scrollbar-x").scrollLeft(sleft);
         }
