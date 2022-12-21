@@ -596,6 +596,7 @@ function luckysheetMoveHighlightCell(postion, index, type, isScroll) {
     let scrollLeft = $("#luckysheet-cell-main").scrollLeft();
     let scrollTop = $("#luckysheet-cell-main").scrollTop();
     let winH = $("#luckysheet-cell-main").height(), winW = $("#luckysheet-cell-main").width();
+    let frozenColumnWidth = $("#luckysheet-grid-window-1")[0].children[4].width;
 
     let sleft = 0, stop = 0;
     if (col - scrollLeft - winW + 20 > 0) {
@@ -604,8 +605,8 @@ function luckysheetMoveHighlightCell(postion, index, type, isScroll) {
             $("#luckysheet-scrollbar-x").scrollLeft(sleft);
         }
     }
-    else if (col_pre - scrollLeft - 91 < 0) {
-        sleft = col_pre - 91;
+    else if (col_pre - scrollLeft - frozenColumnWidth < 0) {
+        sleft = col_pre - frozenColumnWidth;
         if (isScroll) {
             $("#luckysheet-scrollbar-x").scrollLeft(sleft);
         }
