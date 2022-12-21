@@ -7,6 +7,7 @@ import { selectHightlightShow } from './select';
 import pivotTable from './pivotTable';
 import Store from '../store';
 import server from './server';
+import luckysheetConfigsetting from '../controllers/luckysheetConfigsetting';
 
 function luckysheetMoveEndCell(postion, type, isScroll, terminal, onlyvalue) {
     if (isScroll == null) {
@@ -596,6 +597,11 @@ function luckysheetMoveHighlightCell(postion, index, type, isScroll) {
     let scrollLeft = $("#luckysheet-cell-main").scrollLeft();
     let scrollTop = $("#luckysheet-cell-main").scrollTop();
     let winH = $("#luckysheet-cell-main").height(), winW = $("#luckysheet-cell-main").width();
+    let frozenColumnWidth = 20;
+
+    if (luckysheetConfigsetting.useKrosCustomization) {
+        frozenColumnWidth = $("#freezen_3")?.width() ?? $("#freezen_v")?.width() ?? frozenColumnWidth;
+    }
 
     let sleft = 0, stop = 0;
     if (col - scrollLeft - winW + 20 > 0) {
@@ -604,8 +610,8 @@ function luckysheetMoveHighlightCell(postion, index, type, isScroll) {
             $("#luckysheet-scrollbar-x").scrollLeft(sleft);
         }
     }
-    else if (col_pre - scrollLeft - 20 < 0) {
-        sleft = col_pre - 20;
+    else if (col_pre - scrollLeft - frozenColumnWidth < 0) {
+        sleft = col_pre - frozenColumnWidth;
         if (isScroll) {
             $("#luckysheet-scrollbar-x").scrollLeft(sleft);
         }
