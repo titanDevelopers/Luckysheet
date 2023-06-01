@@ -150,6 +150,8 @@ luckysheet.create = function (setting) {
     luckysheetConfigsetting.useKrosCustomization = extendsetting.useKrosCustomization;
     luckysheetConfigsetting.spreadsheetFunctionsFF = extendsetting.spreadsheetFunctionsFF;
 
+    luckysheetConfigsetting.ieuMode = extendsetting.ieuMode;
+
     if (Store.lang === 'zh') flatpickr.localize(Mandarin.zh);
 
     // Store the currently used plugins for monitoring asynchronous loading
@@ -258,6 +260,16 @@ luckysheet.hideLoadingProgress = hideloading;
 luckysheet.luckysheetextendData = luckysheetextendData;
 
 luckysheet.locales = locales;
+
+luckysheet.setIeuSpecialRows = (specialRows) => {
+    luckysheetConfigsetting.ieuSpecialRows = specialRows;
+    luckysheetrefreshgrid();
+};
+
+luckysheet.setIeuSpecialColumns = (specialColumns) => {
+    luckysheetConfigsetting.ieuSpecialColumns = specialColumns;
+    luckysheetrefreshgrid();
+};
 
 export {
     luckysheet

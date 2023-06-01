@@ -19,6 +19,7 @@ import method from './method';
 import Store from '../store';
 import locale from '../locale/locale';
 import sheetmanage from '../controllers/sheetmanage';
+import luckysheetConfigsetting from '../controllers/luckysheetConfigsetting';
 
 function luckysheetDrawgridRowTitle(scrollHeight, drawHeight, offsetTop) {
     if (scrollHeight == null) {
@@ -95,7 +96,13 @@ function luckysheetDrawgridRowTitle(scrollHeight, drawHeight, offsetTop) {
 
         }
         else {
-            luckysheetTableContent.fillStyle = "#ffffff";
+            let text = r+1;
+            if (luckysheetConfigsetting.ieuMode && luckysheetConfigsetting.ieuSpecialRows && luckysheetConfigsetting.ieuSpecialRows[Store.currentSheetIndex]) {
+                luckysheetTableContent.fillStyle = luckysheetConfigsetting.ieuSpecialRows[Store.currentSheetIndex][r]?.color ?? "#ffffff";
+                text += luckysheetConfigsetting.ieuSpecialRows[Store.currentSheetIndex][r]?.text ?? '';
+            } else {
+                luckysheetTableContent.fillStyle = "#ffffff";
+            }
             luckysheetTableContent.fillRect(
                 0,
                 (start_r + offsetTop + firstOffset) , 
@@ -107,13 +114,13 @@ function luckysheetDrawgridRowTitle(scrollHeight, drawHeight, offsetTop) {
             //行标题栏序列号
             luckysheetTableContent.save();//save scale before draw text
             luckysheetTableContent.scale(Store.zoomRatio,Store.zoomRatio);
-            let textMetrics = getMeasureText(r+1, luckysheetTableContent); 
+            let textMetrics = getMeasureText(text, luckysheetTableContent); 
             //luckysheetTableContent.measureText(r + 1);
 
             let horizonAlignPos = (Store.rowHeaderWidth  - textMetrics.width) / 2;
             let verticalAlignPos = (start_r + (end_r - start_r) / 2 + offsetTop) ;
 
-            luckysheetTableContent.fillText(r + 1, horizonAlignPos/Store.zoomRatio, verticalAlignPos/Store.zoomRatio);
+            luckysheetTableContent.fillText(text, horizonAlignPos/Store.zoomRatio, verticalAlignPos/Store.zoomRatio);
             luckysheetTableContent.restore();//restore scale after draw text
         }
 
@@ -293,7 +300,13 @@ function luckysheetDrawgridColumnTitle(scrollWidth, drawWidth, offsetLeft) {
 
         }
         else {
-            luckysheetTableContent.fillStyle = "#ffffff";
+            let text = abc;
+            if (luckysheetConfigsetting.ieuMode && luckysheetConfigsetting.ieuSpecialColumns && luckysheetConfigsetting.ieuSpecialColumns[Store.currentSheetIndex]) {
+                luckysheetTableContent.fillStyle = luckysheetConfigsetting.ieuSpecialColumns[Store.currentSheetIndex][c]?.color ?? "#ffffff";
+                text += luckysheetConfigsetting.ieuSpecialColumns[Store.currentSheetIndex][c]?.text ?? '';
+            } else {
+                luckysheetTableContent.fillStyle = "#ffffff";
+            }
             luckysheetTableContent.fillRect(
                 (start_c + offsetLeft - 1) , 
                 0, 
@@ -306,13 +319,13 @@ function luckysheetDrawgridColumnTitle(scrollWidth, drawWidth, offsetLeft) {
             luckysheetTableContent.save();//save scale before draw text
             luckysheetTableContent.scale(Store.zoomRatio,Store.zoomRatio);
             
-            let textMetrics = getMeasureText(abc, luckysheetTableContent);
+            let textMetrics = getMeasureText(text, luckysheetTableContent);
             //luckysheetTableContent.measureText(abc);
 
             let horizonAlignPos = Math.round((start_c + (end_c - start_c) / 2 + offsetLeft)  - textMetrics.width / 2);
             let verticalAlignPos = Math.round(Store.columnHeaderHeight / 2 );
             
-            luckysheetTableContent.fillText(abc, horizonAlignPos/Store.zoomRatio, verticalAlignPos/Store.zoomRatio);
+            luckysheetTableContent.fillText(text, horizonAlignPos/Store.zoomRatio, verticalAlignPos/Store.zoomRatio);
             luckysheetTableContent.restore();//restore scale after draw text
         }
 
