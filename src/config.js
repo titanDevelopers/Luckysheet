@@ -69,5 +69,5 @@ export default {
     imageUpdateMethodConfig:{}, //自定义图片同步方式
     useKrosCustomization: false, //自定义图片同步方式
     spreadsheetFunctionsFF: false,
-    ieuMode: false
+    customHeadersMode: false
 }

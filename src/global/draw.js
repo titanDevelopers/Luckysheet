@@ -97,9 +97,9 @@ function luckysheetDrawgridRowTitle(scrollHeight, drawHeight, offsetTop) {
         }
         else {
             let text = r+1;
-            if (luckysheetConfigsetting.ieuMode && luckysheetConfigsetting.ieuSpecialRows && luckysheetConfigsetting.ieuSpecialRows[Store.currentSheetIndex]) {
-                luckysheetTableContent.fillStyle = luckysheetConfigsetting.ieuSpecialRows[Store.currentSheetIndex][r]?.color ?? "#ffffff";
-                text += luckysheetConfigsetting.ieuSpecialRows[Store.currentSheetIndex][r]?.text ?? '';
+            if (luckysheetConfigsetting.customHeadersMode && luckysheetConfigsetting.customRowHeaders && luckysheetConfigsetting.customRowHeaders[Store.currentSheetIndex]) {
+                luckysheetTableContent.fillStyle = luckysheetConfigsetting.customRowHeaders[Store.currentSheetIndex][r]?.color ?? "#ffffff";
+                text += luckysheetConfigsetting.customRowHeaders[Store.currentSheetIndex][r]?.text ?? '';
             } else {
                 luckysheetTableContent.fillStyle = "#ffffff";
             }
@@ -301,9 +301,9 @@ function luckysheetDrawgridColumnTitle(scrollWidth, drawWidth, offsetLeft) {
         }
         else {
             let text = abc;
-            if (luckysheetConfigsetting.ieuMode && luckysheetConfigsetting.ieuSpecialColumns && luckysheetConfigsetting.ieuSpecialColumns[Store.currentSheetIndex]) {
-                luckysheetTableContent.fillStyle = luckysheetConfigsetting.ieuSpecialColumns[Store.currentSheetIndex][c]?.color ?? "#ffffff";
-                text += luckysheetConfigsetting.ieuSpecialColumns[Store.currentSheetIndex][c]?.text ?? '';
+            if (luckysheetConfigsetting.customHeadersMode && luckysheetConfigsetting.customColumnHeaders && luckysheetConfigsetting.customColumnHeaders[Store.currentSheetIndex]) {
+                luckysheetTableContent.fillStyle = luckysheetConfigsetting.customColumnHeaders[Store.currentSheetIndex][c]?.color ?? "#ffffff";
+                text += luckysheetConfigsetting.customColumnHeaders[Store.currentSheetIndex][c]?.text ?? '';
             } else {
                 luckysheetTableContent.fillStyle = "#ffffff";
             }
