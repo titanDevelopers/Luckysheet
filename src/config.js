@@ -68,5 +68,6 @@ export default {
     sheetRightClickConfig:{}, //自定义底部sheet页右击菜单
     imageUpdateMethodConfig:{}, //自定义图片同步方式
     useKrosCustomization: false, //自定义图片同步方式
-    spreadsheetFunctionsFF: false
+    spreadsheetFunctionsFF: false,
+    customHeadersMode: false
 }
