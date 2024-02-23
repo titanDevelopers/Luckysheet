@@ -6,6 +6,7 @@ import { genarate, update } from '../global/format';
 import { jfrefreshgrid } from '../global/refresh';
 import editor from '../global/editor';
 import formula from '../global/formula';
+import method from '../global/method';
 import conditionformat from './conditionformat';
 import {checkProtectionLockedRangeList} from './protection';
 import { selectHightlightShow } from './select';
@@ -13,7 +14,8 @@ import { getSheetIndex } from '../methods/get';
 import { getObjType, replaceHtml } from '../utils/util';
 import Store from '../store';
 import locale from '../locale/locale';
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
+import luckysheetConfigsetting from '../controllers/luckysheetConfigsetting';
 
 //选区下拉
 const luckysheetDropCell = {
@@ -337,6 +339,11 @@ const luckysheetDropCell = {
                 $("#luckysheet-dropCell-typeList .luckysheet-cols-menuitem[data-type=8]").hide();
             }
 
+            if (!luckysheetConfigsetting.spreadsheetFunctionsFF) {
+                $("#luckysheet-dropCell-typeList .luckysheet-cols-menuitem[data-type=2]").hide();
+                $("#luckysheet-dropCell-typeList .luckysheet-cols-menuitem[data-type=3]").hide();
+            }
+
             let left = $(this).offset().left;
             let top = $(this).offset().top + 25;
             let winH = $(window).height(), winW = $(window).width();
@@ -372,6 +379,9 @@ const luckysheetDropCell = {
             _this.applyType = type;
 
             _this.update();
+
+            // hook
+            method.createHookFunction('dropCellMenuUpdated', Store.flowdata, Store.luckysheet_select_save);
 
             $("#luckysheet-dropCell-typeList").hide();
             $("#luckysheet-dropCell-icon").css("backgroundColor", "#f1f1f1");

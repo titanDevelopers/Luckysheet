@@ -3621,7 +3621,7 @@ const luckysheetformula = {
         return function_str;
     },
     getFunctionSeparator: function() {
-        if (luckysheetConfigsetting.useCommaDecimalSeparator) {
+        if (luckysheetConfigsetting.useKrosCustomization) {
             return ";";
         } else {
             return ",";
@@ -3856,7 +3856,7 @@ const luckysheetformula = {
             return "";
         }
 
-        if (luckysheetConfigsetting.useCommaDecimalSeparator) {
+        if (luckysheetConfigsetting.useKrosCustomization) {
             txt = txt.replaceAll(',', '.');
         }
 

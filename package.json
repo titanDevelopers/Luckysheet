@@ -1,6 +1,6 @@
 {
   "name": "@kros-sk/luckysheet",
-  "version": "2.1.29",
+  "version": "2.1.35",
   "main": "dist/luckysheet.cjs.js",
   "module": "dist/luckysheet.esm.js",
   "browser": "dist/luckysheet.umd.js",
@@ -47,7 +47,8 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production gulp build",
     "remove-package": "del *.tgz",
-    "package": "npm run build && npm pack && npm publish --access public && npm run remove-package",
+    "package": "npm run build && npm pack",
+    "publish-package": "npm run package && npm publish --access public && npm run remove-package",
     "dev": "cross-env NODE_ENV=development gulp dev",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",

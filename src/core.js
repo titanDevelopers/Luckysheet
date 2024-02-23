@@ -147,7 +147,10 @@ luckysheet.create = function (setting) {
     luckysheetConfigsetting.initShowsheetbarConfig = false;
 
     luckysheetConfigsetting.imageUpdateMethodConfig = extendsetting.imageUpdateMethodConfig;
-    luckysheetConfigsetting.useCommaDecimalSeparator = extendsetting.useCommaDecimalSeparator;
+    luckysheetConfigsetting.useKrosCustomization = extendsetting.useKrosCustomization;
+    luckysheetConfigsetting.spreadsheetFunctionsFF = extendsetting.spreadsheetFunctionsFF;
+
+    luckysheetConfigsetting.customHeadersMode = extendsetting.customHeadersMode;
 
     if (Store.lang === 'zh') flatpickr.localize(Mandarin.zh);
 
@@ -257,6 +260,16 @@ luckysheet.hideLoadingProgress = hideloading;
 luckysheet.luckysheetextendData = luckysheetextendData;
 
 luckysheet.locales = locales;
+
+luckysheet.setCustomRowHeaders = (customRowHeaders) => {
+    luckysheetConfigsetting.customRowHeaders = customRowHeaders;
+    luckysheetrefreshgrid();
+};
+
+luckysheet.setCustomColumnHeaders = (customColumnHeaders) => {
+    luckysheetConfigsetting.customColumnHeaders = customColumnHeaders;
+    luckysheetrefreshgrid();
+};
 
 export {
     luckysheet
