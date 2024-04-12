@@ -802,6 +802,7 @@ const sheetmanage = {
         luckysheetcreatedom(colwidth, rowheight, data, menu, title);
 
         setTimeout(function () {
+            try {
             tooltip.createHoverTip("#luckysheet_info_detail" ,".luckysheet_info_detail_back, .luckysheet_info_detail_input, .luckysheet_info_detail_update");
             tooltip.createHoverTip("#luckysheet-wa-editor" ,".luckysheet-toolbar-menu-button, .luckysheet-toolbar-button, .luckysheet-toolbar-combo-button");
 
@@ -826,6 +827,7 @@ const sheetmanage = {
                 _this.createSheet();
 
                 let execF = function(){
+                try {
                     _this.mergeCalculation(file["index"]);
                     _this.setSheetParam(false);
                     // editor.webWorkerFlowDataCache(Store.flowdata);//worker存数据
@@ -890,6 +892,9 @@ const sheetmanage = {
                             Store.loadingObj.close()
                         }, 500);
                     }
+                } catch(e) {
+                    console.log(e);
+                }
                 }
 
                 let loadSheetUrl = server.loadSheetUrl;
@@ -966,6 +971,9 @@ const sheetmanage = {
             } catch(e) {
                 ini();
                 console.log("缓存操作失败");
+            }
+            } catch(e) {
+                console.log(e);
             }
         }, 1);
     },
