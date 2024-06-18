@@ -856,7 +856,7 @@ function initialFilterHandler(){
                 content = '<div class="luckysheet-mousedown-cancel" style="padding: 10px 30px;text-align: center;">'+locale_filter.filterContainerOneColorTip+'</div>';
             }
             else{
-                content = filterBgColorHtml + filterFcColorHtml + '<div class="luckysheet-mousedown-cancel"><button id="luckysheet-filter-orderby-color-confirm" class="btn btn-primary luckysheet-mousedown-cancel" style="margin: 5px 20px;width: 70px;">'+locale_button.confirm+'</button></div>';
+                content = filterBgColorHtml + filterFcColorHtml + '<div class="luckysheet-mousedown-cancel filter-buttons"><button id="luckysheet-filter-orderby-color-confirm" class="btn btn-primary luckysheet-mousedown-cancel" style="margin: 5px 20px;width: 70px;">'+locale_button.confirm+'</button></div>';
             }
             //颜色筛选子菜单
             $("#luckysheet-filter-orderby-color-submenu").remove();
