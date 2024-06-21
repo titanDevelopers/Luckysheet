@@ -770,8 +770,8 @@ function filtermenuHTML() {
                 <div style="width:205px;" class="luckysheet-mousedown-cancel">${locale_filter.sortByDesc}</div>
             </div>
         </div>
-        -->
         <div class="luckysheet-menuseparator luckysheet-mousedown-cancel" role="separator"></div>
+        -->
         <div id="luckysheet-\${menuid}-orderby-color" class="luckysheet-cols-menuitem luckysheet-cols-submenu luckysheet-mousedown-cancel">
             <div class="luckysheet-cols-menuitem-content luckysheet-mousedown-cancel" style="position: relative;">${locale_filter.filterByColor}<span class="luckysheet-submenu-arrow iconfont luckysheet-iconfont-youjiantou" style="user-select: none;right: 0;"></span></div>
         </div>
