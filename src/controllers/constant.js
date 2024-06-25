@@ -825,7 +825,7 @@ function filtermenuHTML() {
             <div class="luckysheet-cols-menuitem-content filter-buttons luckysheet-mousedown-cancel">
                 <div class="btn btn-primary luckysheet-mousedown-cancel" id="luckysheet-\${menuid}-confirm">${locale_filter.filterConform}</div> 
                 <div class="btn btn-default luckysheet-mousedown-cancel" id="luckysheet-\${menuid}-cancel">${locale_filter.filterCancel}</div> 
-                <div class="btn btn-danger luckysheet-mousedown-cancel" id="luckysheet-\${menuid}-initial">${locale_filter.clearFilter}</div>
+                <!--<div class="btn btn-danger luckysheet-mousedown-cancel" id="luckysheet-\${menuid}-initial">${locale_filter.clearFilter}</div>-->
             </div>
         </div> 
     </div>`

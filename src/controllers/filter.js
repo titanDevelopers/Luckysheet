@@ -450,7 +450,7 @@ function initialFilterHandler(){
         $("#luckysheet-filter-menu, #luckysheet-filter-submenu").hide();
         $("#luckysheet-filter-byvalue-input").val("");
         $("#luckysheet-filter-bycondition").next().hide();
-        $("#luckysheet-filter-byvalue").next().show();
+        $("#luckysheet-filter-byvalue").next().hide();
         
         $menu.data("str", st_r);
         $menu.data("edr", ed_r);
