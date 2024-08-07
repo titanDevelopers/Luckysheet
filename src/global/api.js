@@ -262,7 +262,8 @@ export function clearCell(row, column, options = {}) {
         success
     } = {...options}
 
-    let targetSheetData = $.extend(true, [], Store.luckysheetfile[order].data);
+	let file = Store.luckysheetfile[order];
+    let targetSheetData = $.extend(true, [], file.data);
     let cell = targetSheetData[row][column];
 
     if(getObjType(cell) == "object"){
@@ -271,7 +272,7 @@ export function clearCell(row, column, options = {}) {
 
         if(cell["f"] != null){
             delete cell["f"];
-            formula.delFunctionGroup(row, column, order);
+            formula.delFunctionGroup(row, column, file.index);
 
             delete cell["spl"];
         }
